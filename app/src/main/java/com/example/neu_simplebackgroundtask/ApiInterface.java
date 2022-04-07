@@ -1,8 +1,7 @@
 package com.example.neu_simplebackgroundtask;
 
-import com.example.neu_simplebackgroundtask.model.User;
-
 import java.util.ArrayList;
+import com.example.neu_simplebackgroundtask.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -28,4 +27,5 @@ public interface ApiInterface {
 
     @PUT("users/{id}?access-token="+ token)
     Call<Void> updateUser(@Path("id") int id, @Body() User user);
+
 }
