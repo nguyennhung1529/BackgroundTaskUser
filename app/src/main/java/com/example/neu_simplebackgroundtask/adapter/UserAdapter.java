@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,10 +45,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHoler>
         }
 
         // Set DL len view holder
-        holder.tvId.setText(user.getId());
+        holder.tvId.setText(String.valueOf(user.getId()));
         holder.tvName.setText(user.getName());
 
-        // Bat su kien
+        // Bat su kien khi click vao 1 item => chuyen qua activity DetailUser
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,14 +57,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHoler>
                 iClickItemUserListener.getDetailUser(user);
             }
         });
-
+        // Bat su kien khi click vao btn Xoa
         holder.ivBtnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 iClickItemUserListener.deleteUser(user.getId());
             }
         });
-
+        // Bat su kien khi click vao btn edit
         holder.ivBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

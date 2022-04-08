@@ -35,14 +35,16 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:autofillHints="emailAddress"
-        android:ems="13"
+        android:ems="10"
         android:hint=""
         android:inputType="textEmailAddress"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lbl_name"
         app:layout_constraintTop_toBottomOf="@+id/titleUpdateUser" />
 
     <TextView
@@ -62,7 +64,7 @@
         android:layout_marginTop="16dp"
         android:autofillHints="emailAddress"
         android:hint=""
-        android:ems="13"
+        android:ems="10"
         android:inputType="textEmailAddress"
         android:text=""
         app:layout_constraintEnd_toEndOf="@+id/name"

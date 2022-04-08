@@ -2,14 +2,11 @@ package com.example.neu_simplebackgroundtask;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.neu_simplebackgroundtask.model.User;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -29,11 +26,15 @@ public class DetailActivity extends AppCompatActivity {
         if(bundle == null){
             return;
         }
-        User user = (User) bundle.get("User");
+        User user = (User) bundle.get("object_user");
         mID.setText(String.valueOf(user.getId()));
         mName.setText(user.getName());
         mEmail.setText(user.getEmail());
         mGender.setText(user.getGender());
         mStatus.setText(user.getStatus());
+    }
+
+    public void displayToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 }

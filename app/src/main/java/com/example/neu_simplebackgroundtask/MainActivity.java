@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-                displayToast("Error:" + t.getMessage());
+                displayToast("<getAllUsers> Error:" + t.getMessage());
             }
         });
 
@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
                 final View addUserView = getLayoutInflater().inflate(R.layout.add_user_layout, null);
                 edtName = addUserView.findViewById(R.id.name);
                 edtEmail = addUserView.findViewById(R.id.email);
-                radMale = addUserView.findViewById(R.id.rad_mail);
-                radFemale = addUserView.findViewById(R.id.rad_femail);
+                radMale = addUserView.findViewById(R.id.rad_sexual_mail);
+                radFemale = addUserView.findViewById(R.id.rad_sexual_femail);
                 chkStatus = addUserView.findViewById(R.id.chk_status);
 
                 builder.setView(addUserView);
@@ -149,13 +149,15 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
+                builder.create();
+                builder.show();
             }
         });
     }
 
     private void updateUserExec(int id, User user) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        View updateUserView = getLayoutInflater().inflate(R.layout.update_user_layout, null);
+        final View updateUserView = getLayoutInflater().inflate(R.layout.update_user_layout, null);
         edtName = updateUserView.findViewById(R.id.name);
         edtEmail = updateUserView.findViewById(R.id.email);
         radMale = updateUserView.findViewById(R.id.rad_mail);
@@ -175,18 +177,18 @@ public class MainActivity extends AppCompatActivity {
 
         builder.setView(updateUserView);
         builder.setNegativeButton("Cancel", null);
-        // Cap nhat DL moi
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // Lay DL cap nhat
+                // Cap nhat DL moi
+                // - Lay DL cap nhat
                 String name = edtName.getText().toString().trim();
                 String email = edtEmail.getText().toString().trim();
                 String gender = (radMale.isChecked()) ? "male" : "female";
                 String status = (chkStatus.isChecked()) ? "active" : "inactive";
-                // Push vao user
+                // - Push vao user
                 User user = new User(name, email, gender, status);
-                // Goi API update
+                // - Goi API update
                 ApiClient.getAPI().updateUser(id, user).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
@@ -199,12 +201,14 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        displayToast("Error:" + t.getMessage());
+                        displayToast("<updateUser> Error:" + t.getMessage());
                     }
                 });
-
             }
         });
+
+        builder.create();
+        builder.show();
 
     }
 
@@ -221,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                displayToast("Error:" + t.getMessage());
+                displayToast("<deleteUser> Error:" + t.getMessage());
             }
         });
     }
@@ -238,6 +242,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displayToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 }
